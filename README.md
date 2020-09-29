@@ -1,6 +1,14 @@
 # bot-manager-be
 bot manager back-end repo
 
+## How to install
+- create your mysql database
+- `git clone https://github.com/adamdur/bot-manager-be.git && cd bot-manager-be`
+- run `npm install` to install npm dependencies
+- run `cp .env.example .env` co create .env file && configure it
+- run `npm run migrate` to create tables
+- run `npm run dev` to start local server
+
 # API endpoints
 ## `/api/v1/users`
 - `[GET]` - Get all active users
