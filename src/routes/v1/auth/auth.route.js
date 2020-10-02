@@ -8,4 +8,9 @@ router.route('/login')
         controller.login(req, res);
     });
 
+router.route('/register')
+    .post((req, res) => {
+        controller.register(req, res);
+    });
+
 export default router;

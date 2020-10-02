@@ -203,8 +203,10 @@ export async function checkEmail(email, req=null, res=null) {
  */
 export async function checkUsername(username, req=null, res=null) {
     try {
-        let roleAuthorized = await helper.isUser(req.currentUser);
-        if (!roleAuthorized) return await helper.unauthorized(res);
+        if (req && res) {
+            let roleAuthorized = await helper.isUser(req.currentUser);
+            if (!roleAuthorized) return await helper.unauthorized(res);
+        }
 
         let user = await User.where({'username': username}).fetch({require: false})
         if (req && res) {

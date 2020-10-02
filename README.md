@@ -11,6 +11,27 @@ bot manager back-end repo
 - run `npm run dev` to start local server
 
 # API endpoints
+## `/api/v1/auth/login`
+- `[POST]` - Login user
+    - payload: 
+    ```
+    {
+        email: string().email().required(),
+        password: string().required(),
+    }
+    ```
+  
+## `/api/v1/auth/register`
+- `[POST]` - Register user && login after successfull register
+    - payload: 
+    ```
+    {
+        email: string().email().required(),
+        username: string().min(4).required(),
+        password: string().required(),
+    }
+    ```
+
 ## `/api/v1/users`
 - `[GET]` - Get all active users
 - `[POST]` - Create new user
@@ -81,16 +102,6 @@ bot manager back-end repo
     ```
     {
        username: string().min(4).required()
-    }
-    ```
-  
-## `/api/v1/auth/login`
-- `[POST]` - Login user
-    - payload: 
-    ```
-    {
-        email: string().email().required(),
-        password: string().required(),
     }
     ```
   

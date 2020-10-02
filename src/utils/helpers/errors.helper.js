@@ -24,6 +24,12 @@ export async function notFound(res, message) {
     });
 }
 
+export async function unexpectedError(res, message) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        error: {message: message || 'Unexpected error occurred.'}
+    });
+}
+
 export async function isAdmin(user) {
     return Object.values(user.get('roles')).includes("admin");
 }
