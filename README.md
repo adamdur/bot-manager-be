@@ -7,6 +7,7 @@ bot manager back-end repo
 - run `npm install` to install npm dependencies
 - run `cp .env.example .env` co create .env file && configure it
 - run `npm run migrate` to create tables
+- run `npm run seed:run` to seed database
 - run `npm run dev` to start local server
 
 # API endpoints
