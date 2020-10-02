@@ -14,5 +14,9 @@ module.exports = {
         tableName: 'migrations',
         directory: process.cwd() + '/migrations',
     },
+    seeds: {
+        tableName: 'seeds',
+        directory: process.cwd() + '/seeds',
+    },
     debug: true
 };

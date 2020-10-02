@@ -1,12 +1,11 @@
 import Joi from 'joi';
 
 export default {
-    saveUser:
-        Joi.object({
-            email: Joi.string().email().required(),
-            username: Joi.string().min(4).required(),
-            password: Joi.string().min(6).required(),
-        }),
+    saveUser: Joi.object({
+        email: Joi.string().email().required(),
+        username: Joi.string().min(4).required(),
+        password: Joi.string().min(6).required(),
+    }),
 
     updateUser: Joi.object({
         username: Joi.string().min(4).optional(),
@@ -18,13 +17,11 @@ export default {
         new_password_check: Joi.string().min(6).required(),
     }),
 
-    checkEmail:
-        Joi.object({
-            email: Joi.string().email().required()
-        }),
+    checkEmail: Joi.object({
+        email: Joi.string().email().required()
+    }),
 
-    checkUsername:
-        Joi.object({
-            username: Joi.string().min(4).required()
-        }),
+    checkUsername: Joi.object({
+        username: Joi.string().min(4).required()
+    }),
 };
