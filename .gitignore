@@ -2,6 +2,6 @@
 /node_modules
 /log
 .env
-
+notes.txt
 
 npm-debug.log
