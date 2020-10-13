@@ -1,27 +1,24 @@
 import bookshelf from '../../../config/bookshelf';
+import UserRoles from "./user.roles.model";
+import Role from "./roles.model";
 const TABLE_NAME = 'users';
 
-/**
- * User model.
- */
 class User extends bookshelf.Model {
 
-    /**
-     * Get table name.
-     */
     get tableName() {
         return TABLE_NAME;
     }
 
-    /**
-     * Table has timestamps.
-     */
     get hasTimestamps() {
         return true;
     }
 
     verifyPassword(password) {
         return this.get('password') === password;
+    }
+
+    roles() {
+        return this.hasMany(UserRoles)
     }
 }
 

@@ -8,6 +8,7 @@ export default {
 
     addRenewal: Joi.object({
         price: Joi.number().required().allow(null),
-        period: Joi.string().required().allow(null)
+        period: Joi.string().required().allow(null),
+        currency: Joi.string().optional().valid('USD', 'EUR', 'GBP')
     }),
 };

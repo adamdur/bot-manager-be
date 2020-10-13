@@ -11,7 +11,6 @@ import * as helper from "../utils/helpers/errors.helper";
  * @param {function} next
  *
  */
-
 export default async (req, res, next) => {
     const authorizationHeader = req.headers['authorization'];
     let token = authorizationHeader ? authorizationHeader.split(' ')[1] : null;
@@ -22,7 +21,7 @@ export default async (req, res, next) => {
         if (err) {
             return await helper.unauthorized(res, 'Not authorized.');
         }
-        const user = await User.query({where: {id: decoded.id}, select: ['email', 'id']}).fetch();
+        const user = await User.query({where: {id: decoded.id}, select: ['id', 'email', 'username']}).fetch();
         if (!user) return await helper.notFound(res, 'User not found.');
 
         const roles = await knex

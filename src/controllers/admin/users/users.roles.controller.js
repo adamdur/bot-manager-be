@@ -1,14 +1,12 @@
 import {StatusCodes} from 'http-status-codes';
-import User from '../../models/users/user.model';
-import Roles from '../../models/users/roles.model';
-import UserRoles from '../../models/users/user.roles.model';
-import logger from "../../../config/winston";
-import * as helper from "../../utils/helpers/errors.helper";
-import knex from "../../../config/knexconfig";
+import User from '../../../models/users/user.model';
+import Roles from '../../../models/users/roles.model';
+import UserRoles from '../../../models/users/user.roles.model';
+import logger from "../../../../config/winston";
+import * as helper from "../../../utils/helpers/errors.helper";
+import knex from "../../../../config/knexconfig";
 
 /**
- * Find all roles
- *
  * @param {object} req
  * @param {object} res
  * @returns {*}
@@ -28,8 +26,6 @@ export async function findAll(req, res) {
 }
 
 /**
- * Create role
- *
  * @param {object} req
  * @param {object} res
  * @returns {*}
@@ -58,8 +54,6 @@ export async function create(req, res) {
 }
 
 /**
- * Get user roles
- *
  * @param {object} req
  * @param {object} res
  * @returns {*}
@@ -86,8 +80,6 @@ export async function getUserRoles(req, res) {
 }
 
 /**
- * Assing user roles
- *
  * @param {object} req
  * @param {object} res
  * @returns {*}
@@ -127,8 +119,6 @@ export async function assignUserRoles(req, res) {
 }
 
 /**
- * Delete user roles
- *
  * @param {object} req
  * @param {object} res
  * @returns {*}
