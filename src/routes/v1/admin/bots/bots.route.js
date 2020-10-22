@@ -1,6 +1,6 @@
 import express from 'express';
 import * as controller from '../../../../controllers/admin/bots/bots.controller';
-import isAuthenticated from '../../../../middlewares/authenticate';
+import {isAuthenticated} from '../../../../middlewares/authenticate';
 import validate from '../../../../../config/joi.validate';
 import schema from '../../../../utils/validators/bots/validator.bots';
 

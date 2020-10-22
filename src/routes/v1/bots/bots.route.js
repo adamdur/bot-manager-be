@@ -1,6 +1,6 @@
 import express from 'express';
 import * as controller from '../../../controllers/bots/bots.controller';
-import isAuthenticated from '../../../middlewares/authenticate';
+import {isAuthenticated} from '../../../middlewares/authenticate';
 
 const router = express.Router();
 

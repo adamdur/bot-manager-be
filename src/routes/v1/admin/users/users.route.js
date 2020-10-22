@@ -1,7 +1,7 @@
 import express from 'express';
 import * as controller from '../../../../controllers/admin/users/users.controller';
 import * as rolesController from '../../../../controllers/admin/users/users.roles.controller';
-import isAuthenticated from '../../../../middlewares/authenticate';
+import {isAuthenticated} from '../../../../middlewares/authenticate';
 import validate from '../../../../../config/joi.validate';
 import schema from '../../../../utils/validators/users/validator.users';
 import roleSchema from '../../../../utils/validators/users/validator.roles';

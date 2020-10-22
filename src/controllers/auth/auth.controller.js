@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../../models/users/user.model';
 import UserRoles from '../../models/users/user.roles.model';
@@ -7,6 +6,8 @@ import logger from '../../../config/winston';
 import {StatusCodes} from 'http-status-codes';
 import * as helper from "../../utils/helpers/errors.helper";
 import {checkEmail, checkUsername} from "../users/users.controller";
+import {generateTokens} from "../../middlewares/authenticate";
+import knex from "../../../config/knexconfig";
 
 /**
  * Returns jwt token if valid email and password is provided
@@ -18,19 +19,38 @@ import {checkEmail, checkUsername} from "../users/users.controller";
 export async function login(req, res) {
     const {email, password} = req.body;
     try {
-        const user = await User.where({email: email}).fetch();
+        const user = await User.forge().where({email}).fetch({
+            columns: ['id', 'email', 'username', 'active', 'password'],
+            require: false
+        });
         if (!user) return await helper.notFound(res, 'User not found.');
+        const roles = await knex
+            .select('ur.role_id AS role_id', 'r.code AS code')
+            .from('user_roles AS ur')
+            .leftJoin('roles AS r', {'r.id': 'ur.role_id'})
+            .where('ur.user_id', user.get('id'));
+        let rolesArr = {};
+        for (let role of roles) {
+            rolesArr[role.role_id] = role.code;
+        }
+        user.set('roles', rolesArr);
 
         const validPassword = bcrypt.compareSync(password, user.get('password'));
+        user.unset('password')
         if (!validPassword) return await helper.unauthorized(res, 'Authentication failed. Invalid password.');
 
-        const token = jwt.sign({
-            id: user.get('id'),
-            email: user.get('email')
-        }, process.env.TOKEN_SECRET_KEY);
+        const {accessToken, refreshToken} = await generateTokens(user);
 
+        let cookieOptions = {
+            maxAge: 24 * 60 * 60,
+            httpOnly: process.env.NODE_ENV !== 'development',
+            expires: new Date(Date.now() + parseInt(process.env.REFRESH_TOKEN_LIFE)),
+            secure: process.env.NODE_ENV !== 'development'
+        };
+        res.cookie('refreshToken', refreshToken, cookieOptions);
         return res.status(StatusCodes.OK).json({
-            token,
+            token: accessToken,
+            refreshToken,
             user
         });
     } catch (err) {

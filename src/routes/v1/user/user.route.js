@@ -1,6 +1,6 @@
 import express from 'express';
 import * as controller from '../../../controllers/user/user.controller';
-import isAuthenticated from '../../../middlewares/authenticate';
+import {isAuthenticated} from '../../../middlewares/authenticate';
 import validate from '../../../../config/joi.validate';
 import schema from '../../../utils/validators/user/validator.user';
 
